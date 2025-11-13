@@ -201,7 +201,7 @@ struct FileDescriptorInfo {
      - https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-14.0.0_r1/core/jni/fd_utils.cpp#544
      - https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-14.0.0_r1/core/jni/com_android_internal_os_Zygote.cpp#2329
 */
-DCL_HOOK_FUNC(void, _ZNK18FileDescriptorInfo14ReopenOrDetachERKNSt3__18functionIFvNS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEEEE, void *_this, void *fail_fn) {
+DCL_HOOK_FUNC(void, _ZNK18FileDescriptorInfo14ReopenOrDetachEPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, void *_this, void *fail_fn) {
     const int fd = *(const int *)((uintptr_t)_this + offsetof(FileDescriptorInfo, fd));
     const std::string *file_path = (const std::string *)((uintptr_t)_this + offsetof(FileDescriptorInfo, file_path));
     const bool is_sock = *(const bool *)((uintptr_t)_this + offsetof(FileDescriptorInfo, is_sock));
@@ -221,7 +221,7 @@ DCL_HOOK_FUNC(void, _ZNK18FileDescriptorInfo14ReopenOrDetachERKNSt3__18functionI
     }
 
     bypass_fd_check:
-        old__ZNK18FileDescriptorInfo14ReopenOrDetachERKNSt3__18functionIFvNS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEEEE(_this, fail_fn);
+        old__ZNK18FileDescriptorInfo14ReopenOrDetachEPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE(_this, fail_fn);
 }
 
 // We cannot directly call `dlclose` to unload ourselves, otherwise when `dlclose` returns,
@@ -1103,7 +1103,7 @@ void hook_functions() {
         PLT_HOOK_REGISTER(android_runtime_dev, android_runtime_inode, property_get);
         PLT_HOOK_REGISTER_SYM(android_runtime_dev, android_runtime_inode,
                               "_ZNK18FileDescriptorInfo14ReopenOrDetachEPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE",
-                              _ZNK18FileDescriptorInfo14ReopenOrDetachERKNSt3__18functionIFvNS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEEEE);
+                              _ZNK18FileDescriptorInfo14ReopenOrDetachEPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE);
 
         if (!hook_commit(map_infos)) {
             LOGE("All methods of hooking failed");
