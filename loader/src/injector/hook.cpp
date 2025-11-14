@@ -25,7 +25,7 @@
 #include "module.h"
 #include "misc.h"
 
-#include "solist.h"
+//#include "solist.h"
 
 #include "art_method.h"
 
